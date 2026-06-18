@@ -26,5 +26,9 @@ A neural network framework built from scratch using NumPy to understand the core
 
 * Python
 * NumPy
-* Git
 
+## Results
+
+### Iris Dataset 
+* Training accuracy: 100%
+* Test Accuracy: 90%

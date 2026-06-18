@@ -1,4 +1,11 @@
+import sys
+from pathlib import Path
+
+sys.path.append(
+    str(Path(__file__).resolve().parent.parent)
+)
 import numpy as np
+
 
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
