@@ -30,5 +30,9 @@ A neural network framework built from scratch using NumPy to understand the core
 ## Results
 
 ### Iris Dataset 
-* Training accuracy: 100%
+* Training Accuracy: 100%
 * Test Accuracy: 93%
+
+### MNIST Dataset
+* Training Accuracy: 100%
+* Test Accuracy: 94.90%
