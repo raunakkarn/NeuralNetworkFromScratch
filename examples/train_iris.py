@@ -47,34 +47,50 @@ optimizer = Adam(lr=0.01)
 
 epochs = 500
 
+batch_size = 32
+
 for epoch in range(epochs):
 
-    probs = model.forward(X_train)
+    for start in range(0, len(X_train), batch_size):
 
-    loss = loss_fn.forward(
-        probs,
-        y_train
-    )
+        end = start + batch_size
 
-    grad = loss_fn.backward(
-        probs,
-        y_train
-    )
+        X_batch = X_train[start:end]
+        y_batch = y_train[start:end]
 
-    model.backward(grad)
+        probs = model.forward(X_batch)
 
-    optimizer.step(model.layers)
+        loss = loss_fn.forward(
+            probs,
+            y_batch
+        )
+
+        grad = loss_fn.backward(
+            probs,
+            y_batch
+        )
+
+        model.backward(grad)
+
+        optimizer.step(model.layers)
 
     if epoch % 50 == 0:
 
+        train_probs = model.forward(X_train)
+
         acc = accuracy(
             y_train,
-            probs
+            train_probs
+        )
+
+        train_loss = loss_fn.forward(
+            train_probs,
+            y_train
         )
 
         print(
             f"Epoch {epoch} "
-            f"Loss {loss:.4f} "
+            f"Loss {train_loss:.4f} "
             f"Acc {acc:.4f}"
         )
 
