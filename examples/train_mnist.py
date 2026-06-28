@@ -1,13 +1,12 @@
 import sys
 from pathlib import Path
-from nn.checkpoint import save_model
 
 sys.path.append(
     str(Path(__file__).resolve().parent.parent)
 )
 
 import numpy as np
-
+from nn.checkpoint import save_model
 from sklearn.datasets import fetch_openml
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler

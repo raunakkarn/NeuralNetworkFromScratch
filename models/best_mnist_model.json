@@ -1,0 +1,6 @@
+{
+    "dataset": "MNIST",
+    "optimizer": "Adam",
+    "epochs": 20,
+    "test_accuracy": 0.947
+}
