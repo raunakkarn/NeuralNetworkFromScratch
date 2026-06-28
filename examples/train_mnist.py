@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+from nn.checkpoint import save_model
 
 sys.path.append(
     str(Path(__file__).resolve().parent.parent)
@@ -53,7 +54,7 @@ model = Sequential([
 
 loss_fn = CategoricalCrossEntropy()
 optimizer = Adam(lr=0.001)
-
+best_acc = 0
 epochs = 20
 batch_size = 64
 
@@ -117,16 +118,30 @@ for epoch in range(epochs):
         f"Acc {train_acc:.4f}"
     )
 
-test_probs = model.forward(
-    X_test
-)
+test_probs = model.forward(X_test)
 
 test_acc = accuracy(
     y_test,
     test_probs
 )
 
+if test_acc > best_acc:
+
+    best_acc = test_acc
+
+    save_model(
+        model,
+        "models/best_mnist_model.npz",
+        metadata={
+            "dataset": "MNIST",
+            "optimizer": "Adam",
+            "epochs": epochs,
+            "test_accuracy": float(test_acc)
+        }
+    )
+
+    print("Best model saved.")
+
 print(
     f"MNIST Test Accuracy: {test_acc:.4f}"
 )
-
